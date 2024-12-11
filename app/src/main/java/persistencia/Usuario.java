@@ -18,10 +18,11 @@ public class Usuario {
 
     public Usuario(Context context){
         bancoHelper = new Banco(context);
-        banco = bancoHelper.getWritableDatabase();
     }
 
     public void cadastrar(){
+        banco = bancoHelper.getWritableDatabase();
+
         ContentValues conteudo = new ContentValues();
         conteudo.put("nome", this.nome);
         conteudo.put("login", this.login);
@@ -29,6 +30,7 @@ public class Usuario {
         conteudo.put("categoria", this.categoria);
 
         banco.insert("usuarios", null, conteudo);
+        banco.close();
     }
 
     public int getId() {

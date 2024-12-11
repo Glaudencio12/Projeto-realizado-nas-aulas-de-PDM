@@ -49,7 +49,7 @@
                 android:text="NOME DE USUÁRIO" />
 
             <EditText
-                android:id="@+id/campoUsername"
+                android:id="@+id/campoLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
@@ -75,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#3F51B5"
+                android:onClick="salvar"
                 android:text="Salvar" />
         </LinearLayout>
     </LinearLayout>
