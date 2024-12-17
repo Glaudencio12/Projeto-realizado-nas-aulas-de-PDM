@@ -2,10 +2,13 @@ package persistencia;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class Usuario {
+
+    private static Usuario usuario;
 
     private SQLiteOpenHelper bancoHelper;
     private SQLiteDatabase banco;
@@ -19,6 +22,46 @@ public class Usuario {
     public Usuario(Context context){
         bancoHelper = new Banco(context);
     }
+
+    public static Usuario logado(){
+        return usuario;
+    }
+
+    public boolean realizarLogin(String login, String senha){
+        if(this.getUsuario(login)){
+            if(this.senha.equals(senha)){
+                usuario = this;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean getUsuario(String login){
+        this.banco = this.bancoHelper.getReadableDatabase();
+
+        String condicao = "login = ?";
+        String[] args = {login};
+        Cursor cursor = this.banco.query(
+                "usuarios",
+                null,
+                condicao,
+                args,
+                null,
+                null,
+                null
+        );
+        if(cursor.moveToFirst()){
+            this.id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            this.nome = cursor.getString(cursor.getColumnIndexOrThrow("nome"));
+            this.login = cursor.getString(cursor.getColumnIndexOrThrow("login"));
+            this.senha = cursor.getString(cursor.getColumnIndexOrThrow("senha"));
+            this.categoria = cursor.getInt(cursor.getColumnIndexOrThrow("categoria"));
+            return true;
+        }
+        return false;
+
+    }//Fim da Função
 
     public void cadastrar(){
         banco = bancoHelper.getWritableDatabase();
