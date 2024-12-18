@@ -8,11 +8,9 @@
     tools:context=".PrincipalActivity">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -58,6 +56,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:drawableTop="@drawable/add_50"
+                    android:onClick="tela_terefa"
                     android:text="Cadastrar"
                     android:textColor="#3F51B5"
                     app:cornerRadius="10dp" />
